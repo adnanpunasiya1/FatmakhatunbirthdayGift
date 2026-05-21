@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
@@ -14,7 +15,8 @@
         }
 
         /* Full Screen Window Lock to Prevent Dynamic Elastic Bounces */
-        html, body {
+        html,
+        body {
             width: 100%;
             height: 100%;
             margin: 0;
@@ -50,8 +52,35 @@
         }
 
         @keyframes floatHearts {
-            0% { transform: translateY(105vh) rotate(0deg); opacity: 1; }
-            100% { transform: translateY(-10vh) rotate(360deg); opacity: 0; }
+            0% {
+                transform: translateY(105vh) rotate(0deg);
+                opacity: 1;
+            }
+
+            100% {
+                transform: translateY(-10vh) rotate(360deg);
+                opacity: 0;
+            }
+        }
+
+        /* Confetti Blast Dynamic Animation Styles */
+        .confetti {
+            position: absolute;
+            pointer-events: none;
+            z-index: 999;
+            will-change: transform, opacity;
+            border-radius: 50%;
+        }
+
+        @keyframes confettiBlast {
+            0% {
+                transform: translate(0, 0) rotate(0deg) scale(1);
+                opacity: 1;
+            }
+            100% {
+                transform: translate(var(--x), var(--y)) rotate(var(--r)) scale(0.4);
+                opacity: 0;
+            }
         }
 
         /* Floating Audio Access Controller Widget */
@@ -162,11 +191,21 @@
         }
 
         @keyframes pulseCount {
-            0%, 100% { transform: scale(0.85); opacity: 0.7; }
-            50% { transform: scale(1.1); opacity: 1; }
+
+            0%,
+            100% {
+                transform: scale(0.85);
+                opacity: 0.7;
+            }
+
+            50% {
+                transform: scale(1.1);
+                opacity: 1;
+            }
         }
 
-        .loading-asset, .intro-asset {
+        .loading-asset,
+        .intro-asset {
             width: 140px;
             height: auto;
             margin-bottom: 20px;
@@ -182,8 +221,15 @@
             transition: transform 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275);
         }
 
-        .cake-wrapper:active { transform: scale(0.93); }
-        .cake-asset { width: 100%; height: 100%; object-fit: contain; }
+        .cake-wrapper:active {
+            transform: scale(0.93);
+        }
+
+        .cake-asset {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+        }
 
         /* Premium Visual Stack Deck Framework Layout */
         .card-stack {
@@ -242,11 +288,12 @@
         }
     </style>
 </head>
+
 <body>
 
     <div class="music-btn" id="music-trigger-node" onclick="handleExplicitMusicToggle()">🎵</div>
-    <audio id="core-audio-stream" autoplay muted src="TeriMeriKahaani.mp3"></audio>  
-    
+    <audio id="core-audio-stream" autoplay muted src="TeriMeriKahaani.mp3"></audio>
+
     <div class="screen active" id="screen-countdown">
         <div class="count" id="countdown-value">3</div>
     </div>
@@ -265,21 +312,24 @@
     </div>
 
     <div class="screen" id="screen-cake">
-       <h1 class="gradient-text" id="cake-display-header">Ready to cut your birthday cake, my love? 🎂</h1>
-       <p style="font-size: 0.9rem; margin-bottom: 10px; color: #a38289;">Your surprise is waiting behind the cake ❤️</p>
-        
-        <div class="cake-wrapper" id="cake-click-node" onclick="handleCakeClickGesture()">
+        <h1 class="gradient-text" id="cake-display-header">Ready to cut your birthday cake, my love? 🎂</h1>
+        <p style="font-size: 0.9rem; margin-bottom: 10px; color: #a38289;">Your surprise is waiting behind the cake ❤️</p>
+
+        <div class="cake-wrapper" id="cake-click-node" onclick="handleCakeClickGesture(event)">
             <img src="cake2.gif" class="cake-asset" alt="Cake">
         </div>
 
-        <button class="btn" id="cake-flow-progression-btn" style="display:none; margin-top:15px;" onclick="advanceAppScreen('screen-gallery')">See Sweet Moments ✨</button>
+        <button class="btn" id="cake-flow-progression-btn" style="display:none; margin-top:15px;"
+            onclick="advanceAppScreen('screen-gallery')">See Sweet Moments ✨</button>
     </div>
 
     <div class="screen" id="screen-gallery">
-        <h1 class="gradient-text">Some Sweet Moments of Us</h1>
+        <h1 class="gradient-text">Beautiful Memories We Created Together ❤️</h1>
         <p style="font-size: 0.85rem; margin-bottom: 15px; color: #7a6368;">(Swipe left or right - Infinite Loop)</p>
 
         <div class="card-stack" id="deck-wrapper-node">
+            <div class="photo-card"><img src="6.jpeg" alt="Moment 7"></div>
+            <div class="photo-card"><img src="7.jpeg" alt="Moment 6"></div>
             <div class="photo-card"><img src="5.jpeg" alt="Moment 5"></div>
             <div class="photo-card"><img src="4.jpeg" alt="Moment 4"></div>
             <div class="photo-card"><img src="3.jpeg" alt="Moment 3"></div>
@@ -292,12 +342,14 @@
 
     <div class="screen" id="screen-letter">
         <h1 class="gradient-text">A Special Message 💖</h1>
-        
+
         <div class="message-container">
-            <p>Happy Birthday, My Girl, FatmaKhatun! You deserve all the happiness, love, and smiles in the world today and always.</p>
-            <p>You have this special way of making everything around me brighter. Your smile, your kindness, and the way you care make me the luckiest person.</p>
-            <p>I hope your day is filled with laughter, surprises, and moments that make your heart happy. You're truly one of a kind, and I just want you to know how special you are to me.</p>
-            <p>Keep being the amazing person you are, spreading joy wherever you go. Wishing you endless happiness and success in life. Always by your side. 💕</p>
+            <p>Happy Birthday, My Beautiful Girl, FatmaKhatun ❤️ May Allah fill your life with endless happiness, love, peace, and countless beautiful moments.</p>
+            <p>From the day you came into my life, everything started feeling more beautiful. Your smile brings peace to my heart, and your presence makes every moment special for me.</p>
+            <p>You are not just beautiful by face, but also by heart. Your kindness, innocence, and caring nature make you truly one of a kind. Every time I see you smile, it feels like my whole world becomes brighter.</p>
+            <p>On your special day, I just want to thank Allah for sending someone as precious as you into my life. I pray that your dreams come true and your life is always filled with love, success, and barakah.</p>
+            <p>No matter what happens, I will always be there for you, supporting you, caring for you, and loving you with all my heart. You mean more to me than words can ever explain. ❤️</p>
+            <p>Once again, Happy 21st Birthday, My Love 🎂✨</p>
         </div>
     </div>
 
@@ -311,7 +363,7 @@
         function createFloatingHearts() {
             const heartSymbols = ['❤️', '💖', '✨', '🌸', '💕'];
             setInterval(() => {
-                if(document.querySelectorAll('.heart-bg').length > 15) return;
+                if (document.querySelectorAll('.heart-bg').length > 15) return;
                 const heart = document.createElement('div');
                 heart.classList.add('heart-bg');
                 heart.innerText = heartSymbols[Math.floor(Math.random() * heartSymbols.length)];
@@ -326,28 +378,26 @@
         // यूजर इंटरैक्शन पर ऑडियो प्ले करने का लॉजिक
         function startAudioPlayback() {
             if (!backgroundTrackActive) {
-                audioMediaStream.muted = false; // म्यूट हटाओ
+                audioMediaStream.muted = false; 
                 audioMediaStream.play()
-                .then(() => {
-                    backgroundTrackActive = true;
-                    audioInterfaceWidget.innerText = "🎵";
-                })
-                .catch((error) => {
-                    console.log("Autoplay blocked or failed:", error);
-                    backgroundTrackActive = false;
-                });
+                    .then(() => {
+                        backgroundTrackActive = true;
+                        audioInterfaceWidget.innerText = "🎵";
+                    })
+                    .catch((error) => {
+                        console.log("Autoplay blocked or failed:", error);
+                        backgroundTrackActive = false;
+                    });
             }
         }
 
-        // पहले किसी भी क्लिक या टच पर म्यूजिक शुरू हो जाएगा
         window.addEventListener('click', startAudioPlayback, { once: true });
         window.addEventListener('touchstart', startAudioPlayback, { once: true });
 
         function handleExplicitMusicToggle() {
-            // यदि यूजर मैन्युअली बटन दबाता है, तो पहले सुनिश्चित करें कि ऑडियो म्यूट न हो
             audioMediaStream.muted = false;
             if (audioMediaStream.paused) {
-                audioMediaStream.play().catch(()=>{});
+                audioMediaStream.play().catch(() => { });
                 audioInterfaceWidget.innerText = "🎵";
                 backgroundTrackActive = true;
             } else {
@@ -359,13 +409,13 @@
 
         function advanceAppScreen(screenTargetIdentifier) {
             document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
-            
+
             const targetedNode = document.getElementById(screenTargetIdentifier);
-            if(targetedNode) {
+            if (targetedNode) {
                 targetedNode.classList.add('active');
             }
 
-            if(screenTargetIdentifier === 'screen-gallery') {
+            if (screenTargetIdentifier === 'screen-gallery') {
                 arrangeCardsZIndexStack();
             }
         }
@@ -374,15 +424,15 @@
             createFloatingHearts();
             let internalCounter = 3;
             const outputCounterNode = document.getElementById('countdown-value');
-            
+
             let countdownExecutionTimer = setInterval(() => {
                 internalCounter--;
-                if(internalCounter > 0) {
+                if (internalCounter > 0) {
                     outputCounterNode.innerText = internalCounter;
                 } else {
                     clearInterval(countdownExecutionTimer);
                     advanceAppScreen('screen-loading');
-                    
+
                     setTimeout(() => {
                         advanceAppScreen('screen-welcome');
                     }, 2500);
@@ -392,7 +442,66 @@
             bindStackCardDraggingMechanic();
         });
 
-        function handleCakeClickGesture() {
+        // फटाकड़ा / कॉन्फेटी ब्लास्ट एनीमेशन फंक्शन
+        function createConfettiBlast(originX, originY) {
+            const colors = ['#ff4d6d', '#ff7597', '#ffb3c1', '#3b82f6', '#10b981', '#8b5cf6', '#f59e0b'];
+            const shapes = ['❤️', '💖', '✨', '◆', '●', '■'];
+            const confettiCount = 120; // फुल ग्रैंड ब्लास्ट के लिए पार्टिकल्स की संख्या
+
+            for (let i = 0; i < confettiCount; i++) {
+                const particle = document.createElement('div');
+                particle.className = 'confetti';
+                
+                // रैंडम शेप चुनना (कुछ टेक्स्ट मोजी होंगे, कुछ सिंपल कलरफुल ब्लॉक्स)
+                const isTextShape = Math.random() > 0.4;
+                if (isTextShape) {
+                    particle.innerText = shapes[Math.floor(Math.random() * shapes.length)];
+                    particle.style.fontSize = (Math.random() * 12 + 10) + 'px';
+                } else {
+                    particle.style.background = colors[Math.floor(Math.random() * colors.length)];
+                    particle.style.width = (Math.random() * 8 + 6) + 'px';
+                    particle.style.height = (Math.random() * 8 + 6) + 'px';
+                }
+
+                // जहां क्लिक हुआ है ठीक उसी जगह से ब्लास्ट शुरू होगा
+                particle.style.left = originX + 'px';
+                particle.style.top = originY + 'px';
+
+                // चारों तरफ फैलने के लिए रैंडम एंगल्स (Math.PI * 2 = 360 degree)
+                const angle = Math.random() * Math.PI * 2;
+                const velocity = Math.random() * 250 + 100; // कितनी दूर तक फैलेंगे
+                
+                const destinationX = Math.cos(angle) * velocity;
+                const destinationY = Math.sin(angle) * velocity + 150; // थोड़ा सा ग्रेविटी इफेक्ट (नीचे गिरना)
+                const randomRotation = Math.random() * 720 - 360;
+
+                // CSS वेरिएबल्स का इस्तेमाल डायनामिक वैल्यूज पास करने के लिए
+                particle.style.setProperty('--x', `${destinationX}px`);
+                particle.style.setProperty('--y', `${destinationY}px`);
+                particle.style.setProperty('--r', `${randomRotation}deg`);
+
+                // एनीमेशन ट्रिगर
+                const duration = Math.random() * 1.5 + 1; // 1 से 2.5 सेकंड तक चलेगा
+                particle.style.animation = `confettiBlast ${duration}s cubic-bezier(0.1, 0.8, 0.3, 1) forwards`;
+
+                document.body.appendChild(particle);
+
+                // स्क्रीन से पुराने पार्टिकल्स साफ करना
+                setTimeout(() => {
+                    particle.remove();
+                }, duration * 1000);
+            }
+        }
+
+        function handleCakeClickGesture(event) {
+            // केक पर क्लिक होते ही जहां उंगली/माउस टच हुआ है वहां धमाका होगा
+            const clickX = event.clientX || (event.touches && event.touches[0].clientX) || window.innerWidth / 2;
+            const clickY = event.clientY || (event.touches && event.touches[0].clientY) || window.innerHeight / 2;
+            
+            // ब्लास्ट इफेक्ट्स चलाएं (एक से ज्यादा बार कॉल करने से हैवी ब्लास्ट होगा)
+            createConfettiBlast(clickX, clickY);
+            setTimeout(() => createConfettiBlast(clickX, clickY), 150);
+
             const stageHeaderElement = document.getElementById('cake-display-header');
             const progressionControlNode = document.getElementById('cake-flow-progression-btn');
             stageHeaderElement.innerHTML = "❤️ Happy Birthday To The Love Of My Life, FatmaKhatun 🎉";
@@ -403,11 +512,11 @@
         function arrangeCardsZIndexStack() {
             const currentCards = Array.from(document.querySelectorAll('.photo-card'));
             const total = currentCards.length;
-            
+
             currentCards.forEach((card, index) => {
-                const inverseIndex = total - 1 - index; 
+                const inverseIndex = total - 1 - index;
                 card.style.zIndex = inverseIndex;
-                
+
                 if (inverseIndex === 0) {
                     card.style.transform = `translate3d(0,0,0) translateY(0) rotate(0deg) scale(1)`;
                     card.style.opacity = '1';
@@ -431,7 +540,7 @@
         // Advanced Touch Drag Physics Engine implementation with Recyclable Infinite Array Pipeline mapping
         function bindStackCardDraggingMechanic() {
             const deckContainerNode = document.getElementById('deck-wrapper-node');
-            
+
             let startX = 0;
             let startY = 0;
             let currentX = 0;
@@ -442,8 +551,8 @@
             deckContainerNode.addEventListener('touchstart', (e) => {
                 const cards = Array.from(deckContainerNode.querySelectorAll('.photo-card'));
                 if (cards.length === 0) return;
-                
-                const topCard = cards[cards.length - 1]; 
+
+                const topCard = cards[cards.length - 1];
                 const target = e.target.closest('.photo-card');
                 if (!target || target !== topCard) return;
 
@@ -456,31 +565,31 @@
 
             deckContainerNode.addEventListener('touchmove', (e) => {
                 if (!isDragging || !activeTopCard) return;
-                
+
                 currentX = e.touches[0].clientX;
                 currentY = e.touches[0].clientY;
-                
+
                 let deltaX = currentX - startX;
                 let deltaY = currentY - startY;
-                let rotationFactor = deltaX / 15; 
-                
+                let rotationFactor = deltaX / 15;
+
                 activeTopCard.style.transform = `translateX(${deltaX}px) translateY(${deltaY}px) rotate(${rotationFactor}deg) scale(1)`;
             }, { passive: true });
 
             deckContainerNode.addEventListener('touchend', () => {
                 if (!isDragging || !activeTopCard) return;
                 isDragging = false;
-                
+
                 let finalDeltaX = currentX - startX;
                 activeTopCard.style.transition = 'transform 0.45s cubic-bezier(0.165, 0.84, 0.44, 1), opacity 0.3s ease';
 
                 if (Math.abs(finalDeltaX) > 95 && currentX !== 0) {
                     let swipeDirectionSign = finalDeltaX > 0 ? 1 : -1;
                     const flyawayCard = activeTopCard;
-                    
+
                     flyawayCard.style.transform = `translateX(${swipeDirectionSign * 460}px) translateY(${currentY - startY}px) rotate(${swipeDirectionSign * 35}deg)`;
                     flyawayCard.style.opacity = '0';
-                    
+
                     setTimeout(() => {
                         flyawayCard.style.transition = 'none';
                         flyawayCard.style.transform = '';
@@ -492,11 +601,12 @@
                     activeTopCard.style.transform = 'translate3d(0,0,0) rotate(0deg) scale(1)';
                     arrangeCardsZIndexStack();
                 }
-                
+
                 startX = startY = currentX = currentY = 0;
                 activeTopCard = null;
             });
         }
     </script>
 </body>
+
 </html>
