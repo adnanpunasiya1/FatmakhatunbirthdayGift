@@ -245,8 +245,8 @@
 <body>
 
     <div class="music-btn" id="music-trigger-node" onclick="handleExplicitMusicToggle()">🎵</div>
-    <audio id="core-audio-stream" loop src="TeriMeriKahaani.mp3"></audio>
-
+    <audio id="core-audio-stream" autoplay muted src="TeriMeriKahaani.mp3"></audio>  
+    
     <div class="screen active" id="screen-countdown">
         <div class="count" id="countdown-value">3</div>
     </div>
@@ -266,7 +266,7 @@
 
     <div class="screen" id="screen-cake">
        <h1 class="gradient-text" id="cake-display-header">Ready to cut your birthday cake, my love? 🎂</h1>
-<p style="font-size: 0.9rem; margin-bottom: 10px; color: #a38289;">Your surprise is waiting behind the cake ❤️</p>
+       <p style="font-size: 0.9rem; margin-bottom: 10px; color: #a38289;">Your surprise is waiting behind the cake ❤️</p>
         
         <div class="cake-wrapper" id="cake-click-node" onclick="handleCakeClickGesture()">
             <img src="cake2.gif" class="cake-asset" alt="Cake">
@@ -323,59 +323,41 @@
             }, 700);
         }
 
-        // function forceAutoplaySong() {
-        //     if(!backgroundTrackActive) {
-        //         audioMediaStream.play()
-        //         .then(() => {
-        //             backgroundTrackActive = true;
-        //             audioInterfaceWidget.innerText = "🎵";
-        //         })
-        //         .catch(() => {
-        //             backgroundTrackActive = false;
-        //         });
-        //     }
-        // }
+        // यूजर इंटरैक्शन पर ऑडियो प्ले करने का लॉजिक
+        function startAudioPlayback() {
+            if (!backgroundTrackActive) {
+                audioMediaStream.muted = false; // म्यूट हटाओ
+                audioMediaStream.play()
+                .then(() => {
+                    backgroundTrackActive = true;
+                    audioInterfaceWidget.innerText = "🎵";
+                })
+                .catch((error) => {
+                    console.log("Autoplay blocked or failed:", error);
+                    backgroundTrackActive = false;
+                });
+            }
+        }
 
-        // function handleExplicitMusicToggle() {
-        //     if(audioMediaStream.paused) {
-        //         audioMediaStream.play().catch(()=>{});
-        //         audioInterfaceWidget.innerText = "🎵";
-        //         backgroundTrackActive = true;
-        //     } else {
-        //         audioMediaStream.pause();
-        //         audioInterfaceWidget.innerText = "🔇";
-        //         backgroundTrackActive = false;
-        //     }
-        // }
-        // जैसे ही यूजर पेज पर कहीं भी क्लिक करेगा, यह फंक्शन ट्रिगर होगा
-window.addEventListener('click', () => {
-    if (!backgroundTrackActive) {
-        audioMediaStream.play()
-        .then(() => {
-            backgroundTrackActive = true;
-            audioInterfaceWidget.innerText = "🎵";
-        })
-        .catch((error) => {
-            console.log("Autoplay blocked or failed:", error);
-            backgroundTrackActive = false;
-        });
-    }
-}, { once: true }); // { once: true } का मतलब है यह सिर्फ पहले क्लिक पर चलेगा, बार-बार नहीं।
+        // पहले किसी भी क्लिक या टच पर म्यूजिक शुरू हो जाएगा
+        window.addEventListener('click', startAudioPlayback, { once: true });
+        window.addEventListener('touchstart', startAudioPlayback, { once: true });
 
-function handleExplicitMusicToggle() {
-    if (audioMediaStream.paused) {
-        audioMediaStream.play().catch(()=>{});
-        audioInterfaceWidget.innerText = "🎵";
-        backgroundTrackActive = true;
-    } else {
-        audioMediaStream.pause();
-        audioInterfaceWidget.innerText = "🔇";
-        backgroundTrackActive = false;
-    }
-}
+        function handleExplicitMusicToggle() {
+            // यदि यूजर मैन्युअली बटन दबाता है, तो पहले सुनिश्चित करें कि ऑडियो म्यूट न हो
+            audioMediaStream.muted = false;
+            if (audioMediaStream.paused) {
+                audioMediaStream.play().catch(()=>{});
+                audioInterfaceWidget.innerText = "🎵";
+                backgroundTrackActive = true;
+            } else {
+                audioMediaStream.pause();
+                audioInterfaceWidget.innerText = "🔇";
+                backgroundTrackActive = false;
+            }
+        }
 
         function advanceAppScreen(screenTargetIdentifier) {
-            forceAutoplaySong();
             document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
             
             const targetedNode = document.getElementById(screenTargetIdentifier);
@@ -400,7 +382,6 @@ function handleExplicitMusicToggle() {
                 } else {
                     clearInterval(countdownExecutionTimer);
                     advanceAppScreen('screen-loading');
-                    forceAutoplaySong();
                     
                     setTimeout(() => {
                         advanceAppScreen('screen-welcome');
@@ -408,18 +389,13 @@ function handleExplicitMusicToggle() {
                 }
             }, 1000);
 
-            window.addEventListener('touchstart', forceAutoplaySong, { once: true });
-            window.addEventListener('click', forceAutoplaySong, { once: true });
-
             bindStackCardDraggingMechanic();
         });
 
         function handleCakeClickGesture() {
-            forceAutoplaySong();
             const stageHeaderElement = document.getElementById('cake-display-header');
             const progressionControlNode = document.getElementById('cake-flow-progression-btn');
-           // stageHeaderElement.innerHTML = "🎉 Happy Birthday FatmaKhatun! 🎂";
-           stageHeaderElement.innerHTML = "❤️ Happy Birthday To The Love Of My Life, FatmaKhatun 🎉";
+            stageHeaderElement.innerHTML = "❤️ Happy Birthday To The Love Of My Life, FatmaKhatun 🎉";
             progressionControlNode.style.display = 'inline-block';
         }
 
@@ -429,28 +405,22 @@ function handleExplicitMusicToggle() {
             const total = currentCards.length;
             
             currentCards.forEach((card, index) => {
-                // Top card is last in DOM array structure
                 const inverseIndex = total - 1 - index; 
-                
                 card.style.zIndex = inverseIndex;
                 
                 if (inverseIndex === 0) {
-                    // Top Card layout definition: Straight up active handle
-                    card.style.transform = `translateC(0) translateY(0) rotate(0deg) scale(1)`;
+                    card.style.transform = `translate3d(0,0,0) translateY(0) rotate(0deg) scale(1)`;
                     card.style.opacity = '1';
                     card.style.pointerEvents = 'auto';
                 } else if (inverseIndex === 1) {
-                    // Middle tilted right card configuration matching layout target mockup image reference
                     card.style.transform = `translateY(-4px) translateX(6px) rotate(3deg) scale(0.97)`;
                     card.style.opacity = '0.95';
                     card.style.pointerEvents = 'none';
                 } else if (inverseIndex === 2) {
-                    // Base back tilted left card arrangement context
                     card.style.transform = `translateY(-10px) translateX(-6px) rotate(-4deg) scale(0.94)`;
                     card.style.opacity = '0.85';
                     card.style.pointerEvents = 'none';
                 } else {
-                    // Deep queue items hide out smoothly behind
                     card.style.transform = `translateY(-15px) rotate(0deg) scale(0.9)`;
                     card.style.opacity = '0';
                     card.style.pointerEvents = 'none';
@@ -473,9 +443,7 @@ function handleExplicitMusicToggle() {
                 const cards = Array.from(deckContainerNode.querySelectorAll('.photo-card'));
                 if (cards.length === 0) return;
                 
-                // Fetch current active structural top node element secure reference context
                 const topCard = cards[cards.length - 1]; 
-                
                 const target = e.target.closest('.photo-card');
                 if (!target || target !== topCard) return;
 
@@ -483,7 +451,7 @@ function handleExplicitMusicToggle() {
                 isDragging = true;
                 startX = e.touches[0].clientX;
                 startY = e.touches[0].clientY;
-                activeTopCard.style.transition = 'none'; // Unbind transitions for fluid real-time finger-following tracing
+                activeTopCard.style.transition = 'none';
             }, { passive: true });
 
             deckContainerNode.addEventListener('touchmove', (e) => {
@@ -494,8 +462,6 @@ function handleExplicitMusicToggle() {
                 
                 let deltaX = currentX - startX;
                 let deltaY = currentY - startY;
-                
-                // Rotational angle factor dynamics matching moving direction vectors
                 let rotationFactor = deltaX / 15; 
                 
                 activeTopCard.style.transform = `translateX(${deltaX}px) translateY(${deltaY}px) rotate(${rotationFactor}deg) scale(1)`;
@@ -508,16 +474,13 @@ function handleExplicitMusicToggle() {
                 let finalDeltaX = currentX - startX;
                 activeTopCard.style.transition = 'transform 0.45s cubic-bezier(0.165, 0.84, 0.44, 1), opacity 0.3s ease';
 
-                // Swipe evaluation benchmark limit verify check
                 if (Math.abs(finalDeltaX) > 95 && currentX !== 0) {
                     let swipeDirectionSign = finalDeltaX > 0 ? 1 : -1;
                     const flyawayCard = activeTopCard;
                     
-                    // Throw animation parameters trigger implementation
                     flyawayCard.style.transform = `translateX(${swipeDirectionSign * 460}px) translateY(${currentY - startY}px) rotate(${swipeDirectionSign * 35}deg)`;
                     flyawayCard.style.opacity = '0';
                     
-                    // REPEAT LOOP: Place thrown card quietly at the bottom sequence chain
                     setTimeout(() => {
                         flyawayCard.style.transition = 'none';
                         flyawayCard.style.transform = '';
@@ -526,12 +489,10 @@ function handleExplicitMusicToggle() {
                         arrangeCardsZIndexStack();
                     }, 350);
                 } else {
-                    // Snap back securely if drag thresholds validation breaks midways
                     activeTopCard.style.transform = 'translate3d(0,0,0) rotate(0deg) scale(1)';
                     arrangeCardsZIndexStack();
                 }
                 
-                // Flush instance registries clean tracking frames
                 startX = startY = currentX = currentY = 0;
                 activeTopCard = null;
             });
