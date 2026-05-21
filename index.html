@@ -369,7 +369,6 @@
         const audioInterfaceWidget = document.getElementById('music-trigger-node');
         let backgroundTrackActive = false;
         
-    });
         function createFloatingHearts() {
             const heartSymbols = ['❤️', '💖', '✨', '🌸', '💕'];
             setInterval(() => {
@@ -404,7 +403,7 @@
             if (!backgroundTrackActive) {
 
                 // Audio ko 1:40 (100 sec) se start karo
-                audioMediaStream.currentTime = 100;
+              audioMediaStream.currentTime = 100;
 
                 audioMediaStream.muted = false;
 
