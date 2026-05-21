@@ -77,6 +77,7 @@
                 transform: translate(0, 0) rotate(0deg) scale(1);
                 opacity: 1;
             }
+
             100% {
                 transform: translate(var(--x), var(--y)) rotate(var(--r)) scale(0.4);
                 opacity: 0;
@@ -308,12 +309,14 @@
         <img src="intro.gif" class="intro-asset" alt="Hello Kitty">
         <h1 class="gradient-text">A Beautiful Day For A Beautiful Girl ✨</h1>
         <p>Your birthday surprise is waiting for you, made with love by Adnan ❤️</p>
-        <button class="btn" id="start-surprise-action-trigger" onclick="advanceAppScreen('screen-cake')">🎁 Start the surprise</button>
+        <button class="btn" id="start-surprise-action-trigger" onclick="advanceAppScreen('screen-cake')">🎁 Start the
+            surprise</button>
     </div>
 
     <div class="screen" id="screen-cake">
         <h1 class="gradient-text" id="cake-display-header">Ready to cut your birthday cake, my love? 🎂</h1>
-        <p style="font-size: 0.9rem; margin-bottom: 10px; color: #a38289;">Your surprise is waiting behind the cake ❤️</p>
+        <p style="font-size: 0.9rem; margin-bottom: 10px; color: #a38289;">Your surprise is waiting behind the cake ❤️
+        </p>
 
         <div class="cake-wrapper" id="cake-click-node" onclick="handleCakeClickGesture(event)">
             <img src="cake2.gif" class="cake-asset" alt="Cake">
@@ -337,18 +340,24 @@
             <div class="photo-card"><img src="1.jpeg" alt="Moment 1"></div>
         </div>
 
-        <button class="btn" style="margin-top: 5px;" onclick="advanceAppScreen('screen-letter')">💌 Open Adnan's Message</button>
+        <button class="btn" style="margin-top: 5px;" onclick="advanceAppScreen('screen-letter')">💌 Open Adnan's
+            Message</button>
     </div>
 
     <div class="screen" id="screen-letter">
         <h1 class="gradient-text">A Special Message 💖</h1>
 
         <div class="message-container">
-            <p>Happy Birthday, My Beautiful Girl, FatmaKhatun ❤️ May Allah fill your life with endless happiness, love, peace, and countless beautiful moments.</p>
-            <p>From the day you came into my life, everything started feeling more beautiful. Your smile brings peace to my heart, and your presence makes every moment special for me.</p>
-            <p>You are not just beautiful by face, but also by heart. Your kindness, innocence, and caring nature make you truly one of a kind. Every time I see you smile, it feels like my whole world becomes brighter.</p>
-            <p>On your special day, I just want to thank Allah for sending someone as precious as you into my life. I pray that your dreams come true and your life is always filled with love, success, and barakah.</p>
-            <p>No matter what happens, I will always be there for you, supporting you, caring for you, and loving you with all my heart. You mean more to me than words can ever explain. ❤️</p>
+            <p>Happy Birthday, My Beautiful Girl, FatmaKhatun ❤️ May Allah fill your life with endless happiness, love,
+                peace, and countless beautiful moments.</p>
+            <p>From the day you came into my life, everything started feeling more beautiful. Your smile brings peace to
+                my heart, and your presence makes every moment special for me.</p>
+            <p>You are not just beautiful by face, but also by heart. Your kindness, innocence, and caring nature make
+                you truly one of a kind. Every time I see you smile, it feels like my whole world becomes brighter.</p>
+            <p>On your special day, I just want to thank Allah for sending someone as precious as you into my life. I
+                pray that your dreams come true and your life is always filled with love, success, and barakah.</p>
+            <p>No matter what happens, I will always be there for you, supporting you, caring for you, and loving you
+                with all my heart. You mean more to me than words can ever explain. ❤️</p>
             <p>Once again, Happy 21st Birthday, My Love 🎂✨</p>
         </div>
     </div>
@@ -359,7 +368,8 @@
         const audioMediaStream = document.getElementById('core-audio-stream');
         const audioInterfaceWidget = document.getElementById('music-trigger-node');
         let backgroundTrackActive = false;
-
+        
+    });
         function createFloatingHearts() {
             const heartSymbols = ['❤️', '💖', '✨', '🌸', '💕'];
             setInterval(() => {
@@ -376,9 +386,28 @@
         }
 
         // यूजर इंटरैक्शन पर ऑडियो प्ले करने का लॉजिक
+        // function startAudioPlayback() {
+        //     if (!backgroundTrackActive) {
+        //         audioMediaStream.muted = false;
+        //         audioMediaStream.play()
+        //             .then(() => {
+        //                 backgroundTrackActive = true;
+        //                 audioInterfaceWidget.innerText = "🎵";
+        //             })
+        //             .catch((error) => {
+        //                 console.log("Autoplay blocked or failed:", error);
+        //                 backgroundTrackActive = false;
+        //             });
+        //     }
+        // }
         function startAudioPlayback() {
             if (!backgroundTrackActive) {
-                audioMediaStream.muted = false; 
+
+                // Audio ko 1:40 (100 sec) se start karo
+                audioMediaStream.currentTime = 100;
+
+                audioMediaStream.muted = false;
+
                 audioMediaStream.play()
                     .then(() => {
                         backgroundTrackActive = true;
@@ -390,7 +419,6 @@
                     });
             }
         }
-
         window.addEventListener('click', startAudioPlayback, { once: true });
         window.addEventListener('touchstart', startAudioPlayback, { once: true });
 
@@ -451,7 +479,7 @@
             for (let i = 0; i < confettiCount; i++) {
                 const particle = document.createElement('div');
                 particle.className = 'confetti';
-                
+
                 // रैंडम शेप चुनना (कुछ टेक्स्ट मोजी होंगे, कुछ सिंपल कलरफुल ब्लॉक्स)
                 const isTextShape = Math.random() > 0.4;
                 if (isTextShape) {
@@ -470,7 +498,7 @@
                 // चारों तरफ फैलने के लिए रैंडम एंगल्स (Math.PI * 2 = 360 degree)
                 const angle = Math.random() * Math.PI * 2;
                 const velocity = Math.random() * 250 + 100; // कितनी दूर तक फैलेंगे
-                
+
                 const destinationX = Math.cos(angle) * velocity;
                 const destinationY = Math.sin(angle) * velocity + 150; // थोड़ा सा ग्रेविटी इफेक्ट (नीचे गिरना)
                 const randomRotation = Math.random() * 720 - 360;
@@ -497,7 +525,7 @@
             // केक पर क्लिक होते ही जहां उंगली/माउस टच हुआ है वहां धमाका होगा
             const clickX = event.clientX || (event.touches && event.touches[0].clientX) || window.innerWidth / 2;
             const clickY = event.clientY || (event.touches && event.touches[0].clientY) || window.innerHeight / 2;
-            
+
             // ब्लास्ट इफेक्ट्स चलाएं (एक से ज्यादा बार कॉल करने से हैवी ब्लास्ट होगा)
             createConfettiBlast(clickX, clickY);
             setTimeout(() => createConfettiBlast(clickX, clickY), 150);
