@@ -1,0 +1,541 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Surprise For FatmaKhatun 💖</title>
+    <style>
+        :root {
+            --bg-color: #fff0f3;
+            --primary-pink: #ff4d6d;
+            --dark-pink: #c9184a;
+            --text-color: #800f2f;
+            --love-fk-gradient: linear-gradient(45deg, #ff4d6d, #ff7597, #c9184a);
+        }
+
+        /* Full Screen Window Lock to Prevent Dynamic Elastic Bounces */
+        html, body {
+            width: 100%;
+            height: 100%;
+            margin: 0;
+            padding: 0;
+            overflow: hidden;
+            background-color: var(--bg-color);
+            position: relative;
+            touch-action: none;
+        }
+
+        * {
+            box-sizing: border-box;
+            font-family: 'Arial Rounded MT Bold', 'Helvetica Neue', sans-serif;
+            -webkit-tap-highlight-color: transparent;
+            user-select: none;
+        }
+
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: var(--text-color);
+        }
+
+        /* Canvas Floating Heart Particle System Layer */
+        .heart-bg {
+            position: absolute;
+            font-size: 1.5rem;
+            color: rgba(255, 77, 109, 0.25);
+            pointer-events: none;
+            z-index: 0;
+            animation: floatHearts 6s linear infinite;
+        }
+
+        @keyframes floatHearts {
+            0% { transform: translateY(105vh) rotate(0deg); opacity: 1; }
+            100% { transform: translateY(-10vh) rotate(360deg); opacity: 0; }
+        }
+
+        /* Floating Audio Access Controller Widget */
+        .music-btn {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            width: 44px;
+            height: 44px;
+            background: var(--love-fk-gradient);
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: white;
+            font-size: 1.2rem;
+            cursor: pointer;
+            box-shadow: 0 4px 12px rgba(255, 77, 109, 0.4);
+            z-index: 1000;
+        }
+
+        /* Global View Screen Manager Architecture */
+        .screen {
+            position: absolute;
+            width: 90%;
+            max-width: 380px;
+            height: 82vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.35s ease-in-out, transform 0.35s ease-in-out;
+            transform: scale(0.95);
+            z-index: 10;
+        }
+
+        .screen.active {
+            opacity: 1;
+            pointer-events: auto;
+            transform: scale(1);
+        }
+
+        h1 {
+            font-size: 1.65rem;
+            margin-bottom: 12px;
+            font-weight: 700;
+            line-height: 1.35;
+            padding: 0 10px;
+        }
+
+        p {
+            font-size: 1.05rem;
+            color: #5c3d44;
+            margin-bottom: 22px;
+            padding: 0 15px;
+            line-height: 1.4;
+        }
+
+        .gradient-text {
+            background: var(--love-fk-gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            font-weight: bold;
+        }
+
+        .btn {
+            background: var(--love-fk-gradient);
+            color: white;
+            border: none;
+            padding: 14px 38px;
+            font-size: 1.05rem;
+            border-radius: 30px;
+            cursor: pointer;
+            box-shadow: 0 5px 15px rgba(201, 24, 74, 0.35);
+            font-weight: bold;
+            z-index: 50;
+            position: relative;
+            transition: transform 0.1s ease;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .btn:active {
+            transform: scale(0.96);
+        }
+
+        .watermark {
+            position: absolute;
+            bottom: 15px;
+            font-size: 0.85rem;
+            color: var(--primary-pink);
+            font-weight: bold;
+            letter-spacing: 1px;
+            z-index: 100;
+        }
+
+        #screen-countdown .count {
+            font-size: 6.5rem;
+            font-weight: 900;
+            background: var(--love-fk-gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            animation: pulseCount 1s infinite;
+        }
+
+        @keyframes pulseCount {
+            0%, 100% { transform: scale(0.85); opacity: 0.7; }
+            50% { transform: scale(1.1); opacity: 1; }
+        }
+
+        .loading-asset, .intro-asset {
+            width: 140px;
+            height: auto;
+            margin-bottom: 20px;
+            border-radius: 10px;
+        }
+
+        .cake-wrapper {
+            position: relative;
+            width: 220px;
+            height: 220px;
+            margin: 15px 0;
+            cursor: pointer;
+            transition: transform 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+
+        .cake-wrapper:active { transform: scale(0.93); }
+        .cake-asset { width: 100%; height: 100%; object-fit: contain; }
+
+        /* Premium Visual Stack Deck Framework Layout */
+        .card-stack {
+            position: relative;
+            width: 300px;
+            height: 380px;
+            margin-bottom: 25px;
+            perspective: 1000px;
+        }
+
+        .photo-card {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            background: white;
+            border-radius: 20px;
+            padding: 12px;
+            box-shadow: 0 8px 24px rgba(128, 15, 47, 0.15);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            transform-origin: center bottom;
+            will-change: transform, opacity;
+            touch-action: none;
+            transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.15), opacity 0.4s ease;
+        }
+
+        .photo-card img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border-radius: 14px;
+            pointer-events: none;
+            -webkit-user-drag: none;
+        }
+
+        /* Native App Simulation Overlay Message Scrollbox */
+        .message-container {
+            background: white;
+            padding: 25px 20px;
+            border-radius: 24px;
+            box-shadow: 0 10px 25px rgba(224, 77, 112, 0.08);
+            max-height: 50vh;
+            overflow-y: auto;
+            border: 1px solid #f7dee3;
+            touch-action: pan-y;
+        }
+
+        .message-container p {
+            font-size: 1rem;
+            color: #4a3e41;
+            line-height: 1.65;
+            text-align: left;
+            margin-bottom: 12px;
+            font-style: italic;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="music-btn" id="music-trigger-node" onclick="handleExplicitMusicToggle()">🎵</div>
+    <audio id="core-audio-stream" loop src="TeriMeriKahaani.mp3"></audio>
+
+    <div class="screen active" id="screen-countdown">
+        <div class="count" id="countdown-value">3</div>
+    </div>
+
+    <div class="screen" id="screen-loading">
+        <img src="1.webp" class="loading-asset" alt="Loading">
+        <h1 class="gradient-text">A special birthday surprise is loading for the love of my life ❤️...</h1>
+        <p style="font-size: 0.9rem; margin-top: 5px;">Preparing surprise for FatmaKhatun 💖</p>
+    </div>
+
+    <div class="screen" id="screen-welcome">
+        <img src="intro.gif" class="intro-asset" alt="Hello Kitty">
+        <h1 class="gradient-text">A Beautiful Day For A Beautiful Girl ✨</h1>
+        <p>Your birthday surprise is waiting for you, made with love by Adnan ❤️</p>
+        <button class="btn" id="start-surprise-action-trigger" onclick="advanceAppScreen('screen-cake')">🎁 Start the surprise</button>
+    </div>
+
+    <div class="screen" id="screen-cake">
+       <h1 class="gradient-text" id="cake-display-header">Ready to cut your birthday cake, my love? 🎂</h1>
+<p style="font-size: 0.9rem; margin-bottom: 10px; color: #a38289;">Your surprise is waiting behind the cake ❤️</p>
+        
+        <div class="cake-wrapper" id="cake-click-node" onclick="handleCakeClickGesture()">
+            <img src="cake2.gif" class="cake-asset" alt="Cake">
+        </div>
+
+        <button class="btn" id="cake-flow-progression-btn" style="display:none; margin-top:15px;" onclick="advanceAppScreen('screen-gallery')">See Sweet Moments ✨</button>
+    </div>
+
+    <div class="screen" id="screen-gallery">
+        <h1 class="gradient-text">Some Sweet Moments of Us</h1>
+        <p style="font-size: 0.85rem; margin-bottom: 15px; color: #7a6368;">(Swipe left or right - Infinite Loop)</p>
+
+        <div class="card-stack" id="deck-wrapper-node">
+            <div class="photo-card"><img src="5.jpeg" alt="Moment 5"></div>
+            <div class="photo-card"><img src="4.jpeg" alt="Moment 4"></div>
+            <div class="photo-card"><img src="3.jpeg" alt="Moment 3"></div>
+            <div class="photo-card"><img src="2.jpeg" alt="Moment 2"></div>
+            <div class="photo-card"><img src="1.jpeg" alt="Moment 1"></div>
+        </div>
+
+        <button class="btn" style="margin-top: 5px;" onclick="advanceAppScreen('screen-letter')">💌 Open Adnan's Message</button>
+    </div>
+
+    <div class="screen" id="screen-letter">
+        <h1 class="gradient-text">A Special Message 💖</h1>
+        
+        <div class="message-container">
+            <p>Happy Birthday, My Girl, FatmaKhatun! You deserve all the happiness, love, and smiles in the world today and always.</p>
+            <p>You have this special way of making everything around me brighter. Your smile, your kindness, and the way you care make me the luckiest person.</p>
+            <p>I hope your day is filled with laughter, surprises, and moments that make your heart happy. You're truly one of a kind, and I just want you to know how special you are to me.</p>
+            <p>Keep being the amazing person you are, spreading joy wherever you go. Wishing you endless happiness and success in life. Always by your side. 💕</p>
+        </div>
+    </div>
+
+    <div class="watermark">Ap💖Fk</div>
+
+    <script>
+        const audioMediaStream = document.getElementById('core-audio-stream');
+        const audioInterfaceWidget = document.getElementById('music-trigger-node');
+        let backgroundTrackActive = false;
+
+        function createFloatingHearts() {
+            const heartSymbols = ['❤️', '💖', '✨', '🌸', '💕'];
+            setInterval(() => {
+                if(document.querySelectorAll('.heart-bg').length > 15) return;
+                const heart = document.createElement('div');
+                heart.classList.add('heart-bg');
+                heart.innerText = heartSymbols[Math.floor(Math.random() * heartSymbols.length)];
+                heart.style.left = Math.random() * 90 + 'vw';
+                heart.style.animationDuration = (Math.random() * 3 + 4) + 's';
+                heart.style.fontSize = (Math.random() * 0.8 + 0.8) + 'rem';
+                document.body.appendChild(heart);
+                setTimeout(() => heart.remove(), 6000);
+            }, 700);
+        }
+
+        // function forceAutoplaySong() {
+        //     if(!backgroundTrackActive) {
+        //         audioMediaStream.play()
+        //         .then(() => {
+        //             backgroundTrackActive = true;
+        //             audioInterfaceWidget.innerText = "🎵";
+        //         })
+        //         .catch(() => {
+        //             backgroundTrackActive = false;
+        //         });
+        //     }
+        // }
+
+        // function handleExplicitMusicToggle() {
+        //     if(audioMediaStream.paused) {
+        //         audioMediaStream.play().catch(()=>{});
+        //         audioInterfaceWidget.innerText = "🎵";
+        //         backgroundTrackActive = true;
+        //     } else {
+        //         audioMediaStream.pause();
+        //         audioInterfaceWidget.innerText = "🔇";
+        //         backgroundTrackActive = false;
+        //     }
+        // }
+        // जैसे ही यूजर पेज पर कहीं भी क्लिक करेगा, यह फंक्शन ट्रिगर होगा
+window.addEventListener('click', () => {
+    if (!backgroundTrackActive) {
+        audioMediaStream.play()
+        .then(() => {
+            backgroundTrackActive = true;
+            audioInterfaceWidget.innerText = "🎵";
+        })
+        .catch((error) => {
+            console.log("Autoplay blocked or failed:", error);
+            backgroundTrackActive = false;
+        });
+    }
+}, { once: true }); // { once: true } का मतलब है यह सिर्फ पहले क्लिक पर चलेगा, बार-बार नहीं।
+
+function handleExplicitMusicToggle() {
+    if (audioMediaStream.paused) {
+        audioMediaStream.play().catch(()=>{});
+        audioInterfaceWidget.innerText = "🎵";
+        backgroundTrackActive = true;
+    } else {
+        audioMediaStream.pause();
+        audioInterfaceWidget.innerText = "🔇";
+        backgroundTrackActive = false;
+    }
+}
+
+        function advanceAppScreen(screenTargetIdentifier) {
+            forceAutoplaySong();
+            document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
+            
+            const targetedNode = document.getElementById(screenTargetIdentifier);
+            if(targetedNode) {
+                targetedNode.classList.add('active');
+            }
+
+            if(screenTargetIdentifier === 'screen-gallery') {
+                arrangeCardsZIndexStack();
+            }
+        }
+
+        window.addEventListener('DOMContentLoaded', () => {
+            createFloatingHearts();
+            let internalCounter = 3;
+            const outputCounterNode = document.getElementById('countdown-value');
+            
+            let countdownExecutionTimer = setInterval(() => {
+                internalCounter--;
+                if(internalCounter > 0) {
+                    outputCounterNode.innerText = internalCounter;
+                } else {
+                    clearInterval(countdownExecutionTimer);
+                    advanceAppScreen('screen-loading');
+                    forceAutoplaySong();
+                    
+                    setTimeout(() => {
+                        advanceAppScreen('screen-welcome');
+                    }, 2500);
+                }
+            }, 1000);
+
+            window.addEventListener('touchstart', forceAutoplaySong, { once: true });
+            window.addEventListener('click', forceAutoplaySong, { once: true });
+
+            bindStackCardDraggingMechanic();
+        });
+
+        function handleCakeClickGesture() {
+            forceAutoplaySong();
+            const stageHeaderElement = document.getElementById('cake-display-header');
+            const progressionControlNode = document.getElementById('cake-flow-progression-btn');
+           // stageHeaderElement.innerHTML = "🎉 Happy Birthday FatmaKhatun! 🎂";
+           stageHeaderElement.innerHTML = "❤️ Happy Birthday To The Love Of My Life, FatmaKhatun 🎉";
+            progressionControlNode.style.display = 'inline-block';
+        }
+
+        // 3D Tilt Angle and Matrix Real-Stack Coordinator Engine
+        function arrangeCardsZIndexStack() {
+            const currentCards = Array.from(document.querySelectorAll('.photo-card'));
+            const total = currentCards.length;
+            
+            currentCards.forEach((card, index) => {
+                // Top card is last in DOM array structure
+                const inverseIndex = total - 1 - index; 
+                
+                card.style.zIndex = inverseIndex;
+                
+                if (inverseIndex === 0) {
+                    // Top Card layout definition: Straight up active handle
+                    card.style.transform = `translateC(0) translateY(0) rotate(0deg) scale(1)`;
+                    card.style.opacity = '1';
+                    card.style.pointerEvents = 'auto';
+                } else if (inverseIndex === 1) {
+                    // Middle tilted right card configuration matching layout target mockup image reference
+                    card.style.transform = `translateY(-4px) translateX(6px) rotate(3deg) scale(0.97)`;
+                    card.style.opacity = '0.95';
+                    card.style.pointerEvents = 'none';
+                } else if (inverseIndex === 2) {
+                    // Base back tilted left card arrangement context
+                    card.style.transform = `translateY(-10px) translateX(-6px) rotate(-4deg) scale(0.94)`;
+                    card.style.opacity = '0.85';
+                    card.style.pointerEvents = 'none';
+                } else {
+                    // Deep queue items hide out smoothly behind
+                    card.style.transform = `translateY(-15px) rotate(0deg) scale(0.9)`;
+                    card.style.opacity = '0';
+                    card.style.pointerEvents = 'none';
+                }
+            });
+        }
+
+        // Advanced Touch Drag Physics Engine implementation with Recyclable Infinite Array Pipeline mapping
+        function bindStackCardDraggingMechanic() {
+            const deckContainerNode = document.getElementById('deck-wrapper-node');
+            
+            let startX = 0;
+            let startY = 0;
+            let currentX = 0;
+            let currentY = 0;
+            let isDragging = false;
+            let activeTopCard = null;
+
+            deckContainerNode.addEventListener('touchstart', (e) => {
+                const cards = Array.from(deckContainerNode.querySelectorAll('.photo-card'));
+                if (cards.length === 0) return;
+                
+                // Fetch current active structural top node element secure reference context
+                const topCard = cards[cards.length - 1]; 
+                
+                const target = e.target.closest('.photo-card');
+                if (!target || target !== topCard) return;
+
+                activeTopCard = topCard;
+                isDragging = true;
+                startX = e.touches[0].clientX;
+                startY = e.touches[0].clientY;
+                activeTopCard.style.transition = 'none'; // Unbind transitions for fluid real-time finger-following tracing
+            }, { passive: true });
+
+            deckContainerNode.addEventListener('touchmove', (e) => {
+                if (!isDragging || !activeTopCard) return;
+                
+                currentX = e.touches[0].clientX;
+                currentY = e.touches[0].clientY;
+                
+                let deltaX = currentX - startX;
+                let deltaY = currentY - startY;
+                
+                // Rotational angle factor dynamics matching moving direction vectors
+                let rotationFactor = deltaX / 15; 
+                
+                activeTopCard.style.transform = `translateX(${deltaX}px) translateY(${deltaY}px) rotate(${rotationFactor}deg) scale(1)`;
+            }, { passive: true });
+
+            deckContainerNode.addEventListener('touchend', () => {
+                if (!isDragging || !activeTopCard) return;
+                isDragging = false;
+                
+                let finalDeltaX = currentX - startX;
+                activeTopCard.style.transition = 'transform 0.45s cubic-bezier(0.165, 0.84, 0.44, 1), opacity 0.3s ease';
+
+                // Swipe evaluation benchmark limit verify check
+                if (Math.abs(finalDeltaX) > 95 && currentX !== 0) {
+                    let swipeDirectionSign = finalDeltaX > 0 ? 1 : -1;
+                    const flyawayCard = activeTopCard;
+                    
+                    // Throw animation parameters trigger implementation
+                    flyawayCard.style.transform = `translateX(${swipeDirectionSign * 460}px) translateY(${currentY - startY}px) rotate(${swipeDirectionSign * 35}deg)`;
+                    flyawayCard.style.opacity = '0';
+                    
+                    // REPEAT LOOP: Place thrown card quietly at the bottom sequence chain
+                    setTimeout(() => {
+                        flyawayCard.style.transition = 'none';
+                        flyawayCard.style.transform = '';
+                        flyawayCard.style.opacity = '0';
+                        deckContainerNode.insertBefore(flyawayCard, deckContainerNode.firstChild);
+                        arrangeCardsZIndexStack();
+                    }, 350);
+                } else {
+                    // Snap back securely if drag thresholds validation breaks midways
+                    activeTopCard.style.transform = 'translate3d(0,0,0) rotate(0deg) scale(1)';
+                    arrangeCardsZIndexStack();
+                }
+                
+                // Flush instance registries clean tracking frames
+                startX = startY = currentX = currentY = 0;
+                activeTopCard = null;
+            });
+        }
+    </script>
+</body>
+</html>

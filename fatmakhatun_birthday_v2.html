@@ -1,0 +1,676 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Happy 21st Birthday Fatmakhatun</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,600;1,300;1,600&family=Josefin+Sans:wght@100;300;600&family=Great+Vibes&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box;}
+
+:root{
+  --rose: #e8175d;
+  --gold: #c9a84c;
+  --cream: #fdf6f0;
+  --dark: #0d0008;
+  --blush: #f7c5d5;
+}
+
+html,body{width:100%;height:100%;overflow:hidden;background:var(--dark);}
+
+/* ── PARTICLES ── */
+#particles{position:fixed;inset:0;pointer-events:none;z-index:0;}
+.particle{
+  position:absolute;
+  border-radius:50%;
+  pointer-events:none;
+  animation:drift var(--d) ease-in-out infinite;
+  opacity:0;
+}
+@keyframes drift{
+  0%{opacity:0;transform:translateY(0) scale(0.6);}
+  30%{opacity:.7;}
+  70%{opacity:.4;}
+  100%{opacity:0;transform:translateY(-80vh) scale(1.2);}
+}
+
+/* ── SLIDES ── */
+.slide{
+  position:fixed;inset:0;
+  display:flex;flex-direction:column;
+  align-items:center;justify-content:center;
+  z-index:10;
+  opacity:0;pointer-events:none;
+  transition:opacity .8s cubic-bezier(.4,0,.2,1), transform .8s cubic-bezier(.4,0,.2,1);
+  transform:translateY(40px);
+  padding:20px;
+}
+.slide.active{opacity:1;pointer-events:all;transform:translateY(0);}
+.slide.exit{opacity:0;transform:translateY(-40px);}
+
+/* ── SLIDE 1: INTRO ── */
+#s1{background:var(--dark);}
+.s1-ring{
+  position:absolute;
+  border-radius:50%;
+  border:1px solid rgba(200,168,76,.15);
+  animation:spinRing linear infinite;
+}
+@keyframes spinRing{0%{transform:rotate(0deg);}100%{transform:rotate(360deg);}}
+.s1-label{
+  font-family:'Josefin Sans',sans-serif;
+  font-weight:100;
+  font-size:clamp(.65rem,2vw,.8rem);
+  letter-spacing:8px;
+  color:var(--gold);
+  text-transform:uppercase;
+  opacity:.8;
+  margin-bottom:28px;
+}
+.s1-name{
+  font-family:'Great Vibes',cursive;
+  font-size:clamp(4rem,14vw,9rem);
+  color:#fff;
+  line-height:1;
+  text-shadow:0 0 60px rgba(232,23,93,.4);
+}
+.s1-sub{
+  font-family:'Josefin Sans',sans-serif;
+  font-weight:100;
+  font-size:clamp(.9rem,2.5vw,1.1rem);
+  letter-spacing:5px;
+  color:var(--blush);
+  margin-top:16px;
+}
+.s1-btn{
+  margin-top:48px;
+  padding:14px 52px;
+  background:transparent;
+  border:1px solid var(--rose);
+  color:var(--rose);
+  font-family:'Josefin Sans',sans-serif;
+  font-weight:300;
+  font-size:.85rem;
+  letter-spacing:4px;
+  text-transform:uppercase;
+  cursor:pointer;
+  transition:all .4s;
+  position:relative;
+  overflow:hidden;
+  z-index:1;
+}
+.s1-btn::before{
+  content:'';position:absolute;inset:0;
+  background:var(--rose);
+  transform:scaleX(0);transform-origin:left;
+  transition:transform .4s;z-index:-1;
+}
+.s1-btn:hover::before{transform:scaleX(1);}
+.s1-btn:hover{color:#fff;}
+
+/* ── SLIDE 2: PHOTOS ── */
+#s2{background:linear-gradient(135deg,#0d0008 0%,#1a000f 50%,#0d0008 100%);}
+.s2-title{
+  font-family:'Cormorant Garamond',serif;
+  font-style:italic;
+  font-weight:300;
+  font-size:clamp(1rem,3vw,1.4rem);
+  color:var(--gold);
+  letter-spacing:6px;
+  text-transform:uppercase;
+  margin-bottom:36px;
+}
+.photos-row{
+  display:flex;
+  gap:clamp(12px,3vw,28px);
+  align-items:center;
+  justify-content:center;
+}
+.photo-wrap{
+  position:relative;
+  transition:transform .4s;
+}
+.photo-wrap:hover{transform:scale(1.04) translateY(-6px);}
+.photo-wrap:nth-child(2){transform:scale(1.06);}
+.photo-wrap:nth-child(2):hover{transform:scale(1.1) translateY(-8px);}
+.photo-box{
+  width:clamp(110px,20vw,170px);
+  height:clamp(150px,28vw,230px);
+  background:linear-gradient(135deg,#1e0010,#2d0020);
+  border:1px solid rgba(200,168,76,.25);
+  border-radius:4px;
+  display:flex;flex-direction:column;
+  align-items:center;justify-content:center;
+  gap:10px;
+  cursor:pointer;
+  overflow:hidden;
+  position:relative;
+}
+.photo-box img{width:100%;height:100%;object-fit:cover;border-radius:4px;}
+.photo-box .ph-icon{font-size:2rem;color:rgba(200,168,76,.4);}
+.photo-box .ph-text{
+  font-family:'Josefin Sans',sans-serif;
+  font-weight:100;font-size:.65rem;
+  letter-spacing:3px;color:rgba(200,168,76,.5);
+  text-align:center;line-height:1.8;
+}
+.photo-box input{display:none;}
+.photo-corner{
+  position:absolute;
+  width:16px;height:16px;
+}
+.photo-corner.tl{top:6px;left:6px;border-top:1px solid var(--gold);border-left:1px solid var(--gold);}
+.photo-corner.tr{top:6px;right:6px;border-top:1px solid var(--gold);border-right:1px solid var(--gold);}
+.photo-corner.bl{bottom:6px;left:6px;border-bottom:1px solid var(--gold);border-left:1px solid var(--gold);}
+.photo-corner.br{bottom:6px;right:6px;border-bottom:1px solid var(--gold);border-right:1px solid var(--gold);}
+
+/* ── SLIDE 3: MESSAGE ── */
+#s3{background:var(--dark);}
+.s3-line{
+  width:1px;
+  height:clamp(30px,6vh,50px);
+  background:linear-gradient(to bottom,transparent,var(--gold));
+  margin:0 auto 32px;
+}
+.s3-eyebrow{
+  font-family:'Josefin Sans',sans-serif;
+  font-weight:100;
+  font-size:clamp(.6rem,1.5vw,.7rem);
+  letter-spacing:8px;
+  color:var(--gold);
+  text-transform:uppercase;
+  margin-bottom:32px;
+  text-align:center;
+}
+.s3-quote{
+  font-family:'Cormorant Garamond',serif;
+  font-style:italic;
+  font-weight:300;
+  font-size:clamp(1.3rem,4vw,2.2rem);
+  color:var(--cream);
+  line-height:1.7;
+  text-align:center;
+  max-width:640px;
+  position:relative;
+}
+.s3-quote .big-q{
+  font-family:'Cormorant Garamond',serif;
+  font-size:5rem;
+  color:rgba(232,23,93,.2);
+  line-height:0;
+  vertical-align:-1.2rem;
+  margin-right:4px;
+}
+.s3-sig{
+  margin-top:36px;
+  font-family:'Great Vibes',cursive;
+  font-size:clamp(1.6rem,5vw,2.8rem);
+  color:var(--rose);
+  text-align:center;
+}
+.s3-line-bottom{
+  width:60px;height:1px;
+  background:linear-gradient(to right,transparent,var(--gold),transparent);
+  margin:28px auto 0;
+}
+
+/* ── SLIDE 4: CANDLES ── */
+#s4{background:linear-gradient(180deg,#0d0008 0%,#1a0010 100%);}
+.s4-title{
+  font-family:'Great Vibes',cursive;
+  font-size:clamp(2rem,7vw,4rem);
+  color:var(--blush);
+  margin-bottom:8px;
+  text-align:center;
+}
+.s4-sub{
+  font-family:'Josefin Sans',sans-serif;
+  font-weight:100;font-size:.7rem;
+  letter-spacing:4px;color:rgba(255,255,255,.4);
+  text-align:center;margin-bottom:28px;
+  text-transform:uppercase;
+}
+.candles-grid{
+  display:flex;
+  flex-wrap:wrap;
+  justify-content:center;
+  gap:8px;
+  max-width:520px;
+}
+.c-item{
+  display:flex;flex-direction:column;
+  align-items:center;gap:3px;
+  cursor:pointer;
+}
+.c-flame{
+  width:12px;height:18px;
+  background:linear-gradient(to top,#fbbf24,#f97316,#fff);
+  border-radius:50% 50% 30% 30%;
+  animation:flick .35s ease-in-out infinite alternate;
+  filter:blur(.3px);
+  box-shadow:0 0 8px #f97316;
+}
+.c-flame.out{
+  width:10px;height:6px;
+  background:#333;border-radius:50%;
+  animation:none;box-shadow:none;filter:none;
+}
+@keyframes flick{0%{transform:scaleX(1);}100%{transform:scaleX(.75) scaleY(1.15);}}
+.c-body{
+  width:9px;height:28px;
+  background:linear-gradient(to bottom,#f7c5d5,#e8175d44);
+  border-radius:2px;
+}
+.c-num{
+  font-family:'Josefin Sans',sans-serif;
+  font-size:.55rem;font-weight:300;
+  color:rgba(255,255,255,.35);
+  letter-spacing:1px;
+}
+.c-msg{
+  font-family:'Cormorant Garamond',serif;
+  font-style:italic;
+  font-size:clamp(.85rem,2vw,1rem);
+  color:var(--blush);
+  min-height:24px;
+  text-align:center;
+  margin-top:12px;
+  letter-spacing:1px;
+}
+.blow-all-btn{
+  margin-top:16px;
+  padding:10px 36px;
+  border:1px solid rgba(200,168,76,.4);
+  background:transparent;
+  color:var(--gold);
+  font-family:'Josefin Sans',sans-serif;
+  font-weight:300;font-size:.7rem;
+  letter-spacing:4px;text-transform:uppercase;
+  cursor:pointer;
+  border-radius:2px;
+  transition:all .3s;
+}
+.blow-all-btn:hover{background:rgba(200,168,76,.1);}
+
+/* ── SLIDE 5: WISHES ── */
+#s5{background:var(--dark);}
+.s5-title{
+  font-family:'Cormorant Garamond',serif;
+  font-style:italic;font-weight:300;
+  font-size:clamp(1.4rem,4vw,2.2rem);
+  color:var(--cream);
+  margin-bottom:8px;text-align:center;
+}
+.s5-sub{
+  font-family:'Josefin Sans',sans-serif;
+  font-weight:100;font-size:.65rem;
+  letter-spacing:6px;color:var(--gold);
+  text-transform:uppercase;margin-bottom:32px;
+}
+.wishes-row{
+  display:flex;
+  gap:clamp(10px,2vw,20px);
+  flex-wrap:wrap;
+  justify-content:center;
+  max-width:720px;
+}
+.w-card{
+  background:rgba(255,255,255,.03);
+  border:1px solid rgba(200,168,76,.15);
+  border-radius:2px;
+  padding:clamp(14px,3vw,24px);
+  width:clamp(120px,18vw,180px);
+  text-align:center;
+  transition:border-color .3s, background .3s;
+}
+.w-card:hover{
+  border-color:rgba(232,23,93,.4);
+  background:rgba(232,23,93,.04);
+}
+.w-icon{font-size:1.5rem;margin-bottom:10px;}
+.w-title{
+  font-family:'Josefin Sans',sans-serif;
+  font-weight:600;font-size:.65rem;
+  letter-spacing:3px;text-transform:uppercase;
+  color:var(--gold);margin-bottom:8px;
+}
+.w-body{
+  font-family:'Cormorant Garamond',serif;
+  font-weight:300;font-size:.9rem;
+  color:rgba(255,255,255,.55);
+  line-height:1.6;
+}
+
+/* ── SLIDE 6: FINALE ── */
+#s6{background:var(--dark);}
+.finale-big{
+  font-family:'Great Vibes',cursive;
+  font-size:clamp(3rem,12vw,8rem);
+  background:linear-gradient(135deg,var(--blush),var(--rose),var(--gold));
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;
+  background-clip:text;
+  text-align:center;line-height:1.1;
+  animation:pulseGlow 2.5s ease-in-out infinite;
+}
+@keyframes pulseGlow{
+  0%,100%{filter:drop-shadow(0 0 10px rgba(232,23,93,.3));}
+  50%{filter:drop-shadow(0 0 30px rgba(232,23,93,.7));}
+}
+.finale-age{
+  margin-top:16px;
+  font-family:'Josefin Sans',sans-serif;
+  font-weight:100;font-size:clamp(.7rem,2vw,.9rem);
+  letter-spacing:10px;color:var(--gold);
+  text-transform:uppercase;text-align:center;
+}
+.finale-hearts{
+  margin-top:40px;
+  display:flex;gap:20px;justify-content:center;
+}
+.f-heart{
+  font-size:1.8rem;
+  animation:heartBeat 1.2s ease-in-out infinite;
+}
+.f-heart:nth-child(2){animation-delay:.2s;}
+.f-heart:nth-child(3){animation-delay:.4s;}
+@keyframes heartBeat{
+  0%,100%{transform:scale(1);}
+  50%{transform:scale(1.3);}
+}
+.restart-btn{
+  margin-top:40px;
+  padding:12px 44px;
+  border:1px solid rgba(200,168,76,.35);
+  background:transparent;
+  color:rgba(200,168,76,.7);
+  font-family:'Josefin Sans',sans-serif;
+  font-weight:100;font-size:.65rem;
+  letter-spacing:5px;text-transform:uppercase;
+  cursor:pointer;transition:all .4s;border-radius:2px;
+}
+.restart-btn:hover{background:rgba(200,168,76,.08);color:var(--gold);}
+
+/* ── NAV DOTS ── */
+#nav-dots{
+  position:fixed;right:24px;top:50%;transform:translateY(-50%);
+  display:none;flex-direction:column;gap:10px;z-index:50;
+}
+.dot{
+  width:6px;height:6px;
+  border-radius:50%;
+  background:rgba(255,255,255,.2);
+  cursor:pointer;
+  transition:all .3s;
+}
+.dot.active{background:var(--rose);transform:scale(1.5);}
+
+/* ── FIREWORKS ── */
+#fw{position:fixed;inset:0;pointer-events:none;z-index:5;}
+
+/* ── PREV/NEXT ARROWS ── */
+.nav-arrow{
+  position:fixed;
+  bottom:32px;
+  font-family:'Josefin Sans',sans-serif;
+  font-weight:100;font-size:.65rem;
+  letter-spacing:4px;text-transform:uppercase;
+  color:rgba(255,255,255,.3);
+  cursor:pointer;
+  transition:color .3s;
+  display:none;
+  align-items:center;gap:8px;
+  z-index:50;
+}
+.nav-arrow.visible{display:flex;}
+.nav-arrow:hover{color:rgba(255,255,255,.8);}
+#prev-btn{left:50%;transform:translateX(-90px);}
+#next-btn{left:50%;transform:translateX(10px);}
+</style>
+</head>
+<body>
+
+<div id="particles"></div>
+<canvas id="fw"></canvas>
+
+<!-- Slide 1: Intro -->
+<div class="slide active" id="s1">
+  <div class="s1-ring" style="width:min(400px,85vw);height:min(400px,85vw);animation-duration:20s;"></div>
+  <div class="s1-ring" style="width:min(300px,65vw);height:min(300px,65vw);animation-duration:15s;animation-direction:reverse;"></div>
+  <div class="s1-label">A Special Surprise For</div>
+  <div class="s1-name">Fatmakhatun</div>
+  <div class="s1-sub">Turning 21 &nbsp;·&nbsp; With All Our Love</div>
+  <button class="s1-btn" onclick="nextSlide()">Open Your Gift ✦</button>
+</div>
+
+<!-- Slide 2: Photos -->
+<div class="slide" id="s2">
+  <div class="s2-title">Captured Moments</div>
+  <div class="photos-row">
+    <div class="photo-wrap">
+      <div class="photo-box" id="pb0" onclick="document.getElementById('fi0').click()">
+        <div class="photo-corner tl"></div><div class="photo-corner tr"></div>
+        <div class="photo-corner bl"></div><div class="photo-corner br"></div>
+        <div class="ph-icon">✦</div>
+        <div class="ph-text">ADD<br>PHOTO</div>
+        <input type="file" id="fi0" accept="image/*" onchange="loadImg(this,0)">
+      </div>
+    </div>
+    <div class="photo-wrap">
+      <div class="photo-box" id="pb1" onclick="document.getElementById('fi1').click()" style="height:calc(clamp(150px,28vw,230px) + 30px);">
+        <div class="photo-corner tl"></div><div class="photo-corner tr"></div>
+        <div class="photo-corner bl"></div><div class="photo-corner br"></div>
+        <div class="ph-icon">✦</div>
+        <div class="ph-text">ADD<br>PHOTO</div>
+        <input type="file" id="fi1" accept="image/*" onchange="loadImg(this,1)">
+      </div>
+    </div>
+    <div class="photo-wrap">
+      <div class="photo-box" id="pb2" onclick="document.getElementById('fi2').click()">
+        <div class="photo-corner tl"></div><div class="photo-corner tr"></div>
+        <div class="photo-corner bl"></div><div class="photo-corner br"></div>
+        <div class="ph-icon">✦</div>
+        <div class="ph-text">ADD<br>PHOTO</div>
+        <input type="file" id="fi2" accept="image/*" onchange="loadImg(this,2)">
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Slide 3: Message -->
+<div class="slide" id="s3">
+  <div class="s3-line"></div>
+  <div class="s3-eyebrow">From The Heart</div>
+  <div class="s3-quote">
+    <span class="big-q">"</span>
+    You are not just a name — you are a feeling, a dream,
+    a beautiful chapter that makes every story worth reading.
+    Today, the world celebrates the day it got a little more
+    wonderful — the day <em>you</em> arrived.
+    Happy 21st, Fatmakhatun.
+  </div>
+  <div class="s3-sig">With Love, Always</div>
+  <div class="s3-line-bottom"></div>
+</div>
+
+<!-- Slide 4: Candles -->
+<div class="slide" id="s4">
+  <div class="s4-title">Make a Wish</div>
+  <div class="s4-sub">Tap each candle to blow it out</div>
+  <div class="candles-grid" id="candles-grid"></div>
+  <div class="c-msg" id="c-msg"></div>
+  <button class="blow-all-btn" onclick="blowAll()">Blow All Candles ✦</button>
+</div>
+
+<!-- Slide 5: Wishes -->
+<div class="slide" id="s5">
+  <div class="s5-title">21 Reasons We Love You</div>
+  <div class="s5-sub">Wishes for your journey ahead</div>
+  <div class="wishes-row">
+    <div class="w-card"><div class="w-icon">💖</div><div class="w-title">Love</div><div class="w-body">A life overflowing with love, warmth &amp; genuine connections.</div></div>
+    <div class="w-card"><div class="w-icon">🌟</div><div class="w-title">Dreams</div><div class="w-body">May every dream you hold find its way to you.</div></div>
+    <div class="w-card"><div class="w-icon">🌸</div><div class="w-title">Peace</div><div class="w-body">Calm mornings, gentle evenings, and a heart at peace.</div></div>
+    <div class="w-card"><div class="w-icon">✨</div><div class="w-title">Shine</div><div class="w-body">Keep shining the way only you know how to.</div></div>
+    <div class="w-card"><div class="w-icon">🦋</div><div class="w-title">Growth</div><div class="w-body">21 is just the beginning of your most beautiful chapter.</div></div>
+  </div>
+</div>
+
+<!-- Slide 6: Finale -->
+<div class="slide" id="s6">
+  <div class="finale-big">Happy Birthday</div>
+  <div class="finale-age">✦ &nbsp; 21 Years of You &nbsp; ✦</div>
+  <div class="finale-hearts">
+    <span class="f-heart">💕</span>
+    <span class="f-heart">🎂</span>
+    <span class="f-heart">💕</span>
+  </div>
+  <button class="restart-btn" onclick="goTo(0)">Play Again ↺</button>
+</div>
+
+<!-- Nav -->
+<div id="nav-dots">
+  <div class="dot active" onclick="goTo(0)"></div>
+  <div class="dot" onclick="goTo(1)"></div>
+  <div class="dot" onclick="goTo(2)"></div>
+  <div class="dot" onclick="goTo(3)"></div>
+  <div class="dot" onclick="goTo(4)"></div>
+  <div class="dot" onclick="goTo(5)"></div>
+</div>
+
+<div class="nav-arrow" id="prev-btn" onclick="prevSlide()">← Prev</div>
+<div class="nav-arrow" id="next-btn" onclick="nextSlide()">Next →</div>
+
+<script>
+// ── Particles
+(function(){
+  const c=document.getElementById('particles');
+  const colors=['#e8175d','#c9a84c','#f7c5d5','#a78bfa','#ffffff'];
+  for(let i=0;i<60;i++){
+    const p=document.createElement('div');
+    p.className='particle';
+    p.style.left=Math.random()*100+'%';
+    p.style.top=(20+Math.random()*80)+'%';
+    p.style.width=p.style.height=(1+Math.random()*3)+'px';
+    p.style.background=colors[Math.floor(Math.random()*colors.length)];
+    p.style.setProperty('--d',(4+Math.random()*8)+'s');
+    p.style.animationDelay=Math.random()*8+'s';
+    c.appendChild(p);
+  }
+})();
+
+// ── Slides
+let cur=0;
+const total=6;
+const slides=document.querySelectorAll('.slide');
+const dots=document.querySelectorAll('.dot');
+
+function goTo(n,dir=1){
+  slides[cur].classList.remove('active');
+  slides[cur].classList.add('exit');
+  const prev=cur;
+  setTimeout(()=>slides[prev].classList.remove('exit'),800);
+  cur=n;
+  slides[cur].classList.add('active');
+  dots.forEach((d,i)=>d.classList.toggle('active',i===cur));
+  // nav dots & arrows visibility
+  const showNav=cur>0;
+  document.getElementById('nav-dots').style.display=showNav?'flex':'none';
+  document.getElementById('prev-btn').classList.toggle('visible',cur>0&&cur<total-1);
+  document.getElementById('next-btn').classList.toggle('visible',cur>0&&cur<total-1);
+  if(cur===total-1) fireworks();
+  if(cur===3) buildCandles();
+}
+
+function nextSlide(){if(cur<total-1)goTo(cur+1);}
+function prevSlide(){if(cur>0)goTo(cur-1);}
+
+// Keyboard & swipe
+document.addEventListener('keydown',e=>{
+  if(e.key==='ArrowRight'||e.key==='ArrowDown')nextSlide();
+  if(e.key==='ArrowLeft'||e.key==='ArrowUp')prevSlide();
+});
+let tx=0;
+document.addEventListener('touchstart',e=>tx=e.touches[0].clientX,{passive:true});
+document.addEventListener('touchend',e=>{
+  const dx=e.changedTouches[0].clientX-tx;
+  if(Math.abs(dx)>50){if(dx<0)nextSlide();else prevSlide();}
+},{passive:true});
+
+// ── Photos
+function loadImg(input,idx){
+  const f=input.files[0];if(!f)return;
+  const r=new FileReader();
+  r.onload=e=>{
+    const box=document.getElementById('pb'+idx);
+    box.innerHTML=`<img src="${e.target.result}" alt="Photo"><div class="photo-corner tl"></div><div class="photo-corner tr"></div><div class="photo-corner bl"></div><div class="photo-corner br"></div>`;
+    box.onclick=()=>{};
+  };
+  r.readAsDataURL(f);
+}
+
+// ── Candles
+let blown=0;
+function buildCandles(){
+  if(document.getElementById('candles-grid').childElementCount>0)return;
+  const g=document.getElementById('candles-grid');
+  blown=0;
+  for(let i=1;i<=21;i++){
+    const d=document.createElement('div');
+    d.className='c-item';
+    d.id='ci'+i;
+    d.innerHTML=`<div class="c-flame" id="cf${i}"></div><div class="c-body"></div><div class="c-num">${i}</div>`;
+    d.onclick=()=>blow(i);
+    g.appendChild(d);
+  }
+}
+function blow(n){
+  const f=document.getElementById('cf'+n);
+  if(!f||f.classList.contains('out'))return;
+  f.classList.add('out');
+  blown++;
+  const msg=document.getElementById('c-msg');
+  if(blown===21){
+    msg.textContent='✦ All 21 candles out — your wish is granted! ✦';
+    setTimeout(()=>nextSlide(),2000);
+  } else {
+    msg.textContent=`${blown} down, ${21-blown} to go…`;
+  }
+}
+function blowAll(){for(let i=1;i<=21;i++)blow(i);}
+
+// ── Fireworks
+const canvas=document.getElementById('fw');
+const ctx=canvas.getContext('2d');
+let pts=[];
+function resize(){canvas.width=innerWidth;canvas.height=innerHeight;}
+addEventListener('resize',resize);resize();
+
+function burst(x,y){
+  const cols=['#e8175d','#c9a84c','#f7c5d5','#a78bfa','#ffffff','#f97316'];
+  for(let i=0;i<90;i++){
+    const a=Math.random()*Math.PI*2,s=2+Math.random()*7;
+    pts.push({x,y,vx:Math.cos(a)*s,vy:Math.sin(a)*s-3,c:cols[Math.floor(Math.random()*cols.length)],a:1,r:1.5+Math.random()*2.5,dec:.01+Math.random()*.012});
+  }
+}
+function loop(){
+  ctx.clearRect(0,0,canvas.width,canvas.height);
+  pts.forEach(p=>{
+    p.x+=p.vx;p.y+=p.vy;p.vy+=.07;p.a-=p.dec;
+    ctx.save();ctx.globalAlpha=Math.max(0,p.a);
+    ctx.beginPath();ctx.arc(p.x,p.y,p.r,0,Math.PI*2);
+    ctx.fillStyle=p.c;ctx.fill();ctx.restore();
+  });
+  pts=pts.filter(p=>p.a>0);
+  requestAnimationFrame(loop);
+}
+loop();
+
+function fireworks(){
+  let c=0;
+  const iv=setInterval(()=>{
+    burst(Math.random()*canvas.width,Math.random()*canvas.height*.65);
+    if(++c>20)clearInterval(iv);
+  },300);
+}
+</script>
+</body>
+</html>
